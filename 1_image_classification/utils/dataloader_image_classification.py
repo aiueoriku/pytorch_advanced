@@ -63,15 +63,21 @@ def make_datapath_list(phase="train"):
     path_list : list
         データへのパスを格納したリスト
     """
+    
+    """
+    **/*.jpg:
+    ** は、再帰的に全てのサブディレクトリを含めて検索するワイルドカード。
+    *.jpg は、拡張子が jpg で終わる全てのファイルを対象にするパターン。
+    """
 
     rootpath = "./data/hymenoptera_data/"
-    target_path = osp.join(rootpath+phase+'/**/*.jpg')
+    target_path = osp.join(rootpath+phase+'/**/*.jpg') # osp.joinでOSに依存しない形でパスを構築
     print(target_path)
 
     path_list = []  # ここに格納する
 
     # globを利用してサブディレクトリまでファイルパスを取得する
-    for path in glob.glob(target_path):
+    for path in glob.glob(target_path): # glob.globは指定したパターンに一致する全てのファイルパスをリストで返す
         path_list.append(path)
 
     return path_list
